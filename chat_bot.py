@@ -361,11 +361,9 @@ def pre_tool_node(state: State2):
                 "reserv_purpose",
                 "reserv_memo"
             ]:
-                # 🔹 resume_payload 값(state에 들어옴)을 args에도 반영
                 if not args.get(k) and state.get(k):
                     args[k] = state[k]
 
-            # 🔹 병합: state에 args 값 반영
             state = {**state, **{k: v for k, v in args.items() if v}}
 
             tc["args"] = args
@@ -392,10 +390,6 @@ def post_tools(state):
         updates["contact_email" if any(c.isalpha() for c in ci) else "contact_phonenum"] = ci
 
     return {**state, **updates}
-
-# ______________________________ 삭제 에정 _______________________________
-
-# ______________________________ 삭제 에정 _______________________________
 
 
 # --------------------------------------------------------------
