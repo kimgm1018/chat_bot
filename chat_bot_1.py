@@ -136,6 +136,7 @@ def load_chat_history(user_id: str):
 def load_latest_reservation(user_id: str) -> Optional[Dict[str, str]]:
     """가장 최근의 예약 정보를 DB에서 불러옵니다."""
     # ✅ 테이블이 없을 경우를 대비해 생성 함수를 먼저 호출합니다.
+    print("--- LATEST RESERVATION CHECK (Version 2) ---")
     create_user_table_if_not_exists(user_id)
 
     with sqlite3.connect("chat_memory_1.db") as conn:
