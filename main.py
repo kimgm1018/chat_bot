@@ -1,40 +1,8 @@
-# from fastapi import FastAPI
-# from pydantic import BaseModel
-# from chat_bot_1 import run_chat
-# from fastapi.middleware.cors import CORSMiddleware
+import os
+from dotenv import load_dotenv
 
-# app = FastAPI()
-
-# # Cấu hình CORS
-# origins = [
-#     "http://localhost:3000",   # React/Next.js dev server
-# ]
-
-# app.add_middleware(
-#     CORSMiddleware,
-#     allow_origins=origins,          # hoặc ["*"] để cho phép tất cả
-#     allow_credentials=True,
-#     allow_methods=["*"],            # cho phép tất cả phương thức: GET, POST, PUT, DELETE...
-#     allow_headers=["*"],            # cho phép tất cả header
-# )
-# class ChatRequest(BaseModel):
-#     user_id: str
-#     message: str
-
-# class ChatResponse(BaseModel):
-#     answer: str
-
-# session = {"configurable": {"thread_id": }}
-
-# @app.post("/chat", response_model=ChatResponse)
-# def chat(request: ChatRequest):
-#     answer = run_chat(request.message, session)
-#     return {"answer": answer}
-
-# @app.get("/")
-# def root():
-#     return {"msg": "API is running"}
-
+# ✅ 이 코드가 다른 import나 FastAPI 앱 생성보다 먼저 실행되어야 합니다.
+load_dotenv()
 
 from fastapi import FastAPI
 from pydantic import BaseModel
