@@ -391,7 +391,10 @@ SYSTEM_PROMPT = """
 4. 맞다고 확인하면 send_email tool로 이메일 발송과 동시에 데이터 베이스에 저장 (user_id는 State 내에 저장된 것을 쓰면 됩니다.).
 5. 틀리거나 수정 요청 시 다시 make_reservation tool로 재수집 후 확인 절차 반복.
 
-마지막으로 답변들을 마크다운으로 보기 쉽고 깔끔하게 작성하세요.
+[예약 신청 사이클]
+make_reservation -> post_tool_node -> agent -> (모든 정보가 잘 모였다면) send_email
+
+마지막으로 답변들을 마크다운으로 각 항목을 번호를 붙여가며 쉽게 알아볼 수 있도록 작성하세요.
 """
 
 prompt = ChatPromptTemplate.from_messages([
