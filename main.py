@@ -14,6 +14,7 @@ app = FastAPI()
 # CORS
 origins = [
     "http://localhost:3000",
+    "*" # ✅ 모든 출처를 허용하는 와일드카드를 추가합니다.
 ]
 
 app.add_middleware(
