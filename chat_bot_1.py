@@ -135,8 +135,11 @@ def load_chat_history(user_id: str):
 
 def load_latest_reservation(user_id: str) -> Optional[Dict[str, str]]:
     """가장 최근의 예약 정보를 DB에서 불러옵니다."""
+    # ✅ 테이블이 없을 경우를 대비해 생성 함수를 먼저 호출합니다.
+    create_user_table_if_not_exists(user_id)
+
     with sqlite3.connect("chat_memory_1.db") as conn:
-        conn.row_factory = sqlite3.Row # 딕셔너리 형태로 결과를 받기 위함
+        conn.row_factory = sqlite3.Row
         cur = conn.cursor()
         cur.execute("""
             SELECT reserv_company, reserv_name, contact_email, contact_phonenum, reserv_purpose
@@ -148,7 +151,7 @@ def load_latest_reservation(user_id: str) -> Optional[Dict[str, str]]:
         row = cur.fetchone()
 
     if row:
-        return dict(row) # 딕셔너리로 변환하여 반환
+        return dict(row)
     return None
 #______________________________ DB ____________________________________
 
