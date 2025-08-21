@@ -157,7 +157,7 @@ def load_latest_reservation(user_id: str) -> Optional[Dict[str, str]]:
 @tool
 def find_company_info(query: str) -> str:
     """SPMED(회사) 관련 문서를 검색해 상위 결과를 문자열로 반환합니다."""
-    db = FAISS.load_local("/Users/kimgkangmin/Desktop/code/SPMAD/faiss_index",
+    db = FAISS.load_local(os.getenv("FAISS_INDEX_PATH")),
     OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"),
     allow_dangerous_deserialization=True)
     docs = db.as_retriever(k=3).invoke(query)
