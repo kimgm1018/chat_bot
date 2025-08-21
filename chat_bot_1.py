@@ -158,7 +158,7 @@ def load_latest_reservation(user_id: str) -> Optional[Dict[str, str]]:
 def find_company_info(query: str) -> str:
     """SPMED(회사) 관련 문서를 검색해 상위 결과를 문자열로 반환합니다."""
     db = FAISS.load_local("/Users/kimgkangmin/Desktop/code/SPMAD/faiss_index",
-    OpenAIEmbeddings(api_key=" *** "),
+    OpenAIEmbeddings(api_key=os.getenv("OPENAI_API_KEY"),
     allow_dangerous_deserialization=True)
     docs = db.as_retriever(k=3).invoke(query)
     if not docs:
@@ -220,8 +220,8 @@ def send_email(reserv_company: str,
   SMTP_HOST = "email-smtp.ap-northeast-2.amazonaws.com"
   SMTP_PORT = 587
 
-  SMTP_USER = "AKIAV5W7O4PLVAVB5VMA" # AWS SES에서 발급
-  SMTP_PASS = "BI3+c4nmjGyYQpfHRzyAJmtnFDietXWnqakQ//ouiP0u" # AWS SES에서 발급
+  SMTP_USER = os.getenv("SMTP_USER") # AWS SES에서 발급
+  SMTP_PASS = os.getenv("SMTP_PASS") # AWS SES에서 발급
 
   # 메일 내용 구성
   sender = "help@spmed.kr"
@@ -395,7 +395,7 @@ prompt = ChatPromptTemplate.from_messages([
     ("system", f"현재 날짜 : {now_kst.strftime('%Y-%m-%d %A')}"),
     MessagesPlaceholder("messages"),
 ])
-llm = ChatOpenAI(model="gpt-4o", api_key=" *** ")
+llm = ChatOpenAI(model="gpt-4o", api_key=os.getenv("OPENAI_API_KEY"))
 llm_with_tools = llm.bind_tools(tools)
 chain_with_tools = prompt | llm_with_tools
 memory = MemorySaver()
